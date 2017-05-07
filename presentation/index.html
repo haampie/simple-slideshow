@@ -1,0 +1,165 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Parallel Programming</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  </head>
+  <body class="markdown-body">
+    <div id="slide-wrap">
+        <div class="slide" id="0"><h1>Hello world!</h1>
+</div>
+        <div class="slide" id="1"><p>A function taking <strong>no arguments</strong> returning <strong>random integers</strong>.</p>
+<pre><code class="language-c"><span class="hljs-comment">// Definition</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">rand</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;
+
+<span class="hljs-comment">// Usage</span>
+<span class="hljs-keyword">int</span> number = rand();
+</code></pre>
+</div>
+        <div class="slide" id="2"><h2>FORTRAN</h2>
+<pre><code class="language-fortran">X1 = -B + <span class="hljs-built_in">SQRT</span>(B**<span class="hljs-number">2</span> - <span class="hljs-number">4</span>*A*C) / (<span class="hljs-number">2</span> * A);
+X2 = -B - <span class="hljs-built_in">SQRT</span>(B**<span class="hljs-number">2</span> - <span class="hljs-number">4</span>*A*C) / (<span class="hljs-number">2</span> * A);
+</code></pre>
+<h2>Julia</h2>
+<pre><code class="language-julia">x₁ = -b + √(b^<span class="hljs-number">2</span> - <span class="hljs-number">4</span>a * c) / <span class="hljs-number">2</span>a
+x₂ = -b + √(b^<span class="hljs-number">2</span> - <span class="hljs-number">4</span>a * c) / <span class="hljs-number">2</span>a
+</code></pre>
+</div>
+        <div class="slide" id="3"><pre><code class="language-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">square</span><span class="hljs-params">(n)</span>:</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">"Sue me!"</span>
+    <span class="hljs-keyword">return</span> n * n
+</code></pre>
+</div>
+        <div class="slide" id="4"><iframe src="https://gcc.godbolt.org/e#g:!((g:!((g:!((h:codeEditor,i:(fontScale:1.8575209267199997,j:1,source:'int+sum(int+n)%0A%7B%0A++int+total+%3D+0%3B%0A++%0A++for+(int+i+%3D+0%3B+i+%3C+n%3B+i%2B%2B)%0A++++total+%2B%3D+i%3B%0A++%0A++return+total%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50.7175440874439,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:clang400,filters:(b:'0',commentOnly:'0',directives:'0',intel:'0'),fontScale:1.8575209267199997,options:'-O3+-std%3Dc%2B%2B14+-march%3Dnative',source:1),l:'5',n:'0',o:'x86-64+clang+4.0.0+(Editor+%231,+Compiler+%231)',t:'0')),k:49.2824559125561,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4"></iframe>
+</div>
+        <div class="slide" id="5"><style>
+.my-table td {
+    min-width: 60px;
+    line-height: 60px;
+    padding: 0;
+    text-align: center;
+}
+</style>
+<table class="my-table">
+<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+</table>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mspace width="1em"></mspace><mo>⋅</mo></mrow><annotation encoding="application/x-tex">\quad\cdot</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.44445em;"></span><span class="strut bottom" style="height:0.44445em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mspace quad"></span><span class="mbin">⋅</span></span></span></span></p>
+<table class="my-table">
+<tr><td>5</td><td>2</td><td>1</td><td>6</td><td>4</td><td>8</td><td>4</td><td>0</td><td>1</td><td>3</td></tr>
+</table>
+</div>
+        <div class="slide" id="6"><h1><img class="emoji" draggable="false" alt="👶" src="https://twemoji.maxcdn.com/2/svg/1f476.svg"> Version 1</h1>
+<pre><code class="language-c++"><span class="hljs-keyword">uint64_t</span> count(<span class="hljs-keyword">uint64_t</span> n)
+{
+  <span class="hljs-keyword">uint64_t</span> primes = <span class="hljs-number">0</span>;
+
+  <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">uint8_t</span>&gt; is_prime(n, <span class="hljs-literal">true</span>);
+
+  <span class="hljs-comment">// Sieve</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> k = <span class="hljs-number">2</span>; k * k &lt; n; ++k)
+    <span class="hljs-keyword">if</span> (is_prime[k])
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> m = k * k; m &lt; n; m += k)
+        is_prime[m] = <span class="hljs-literal">false</span>;
+
+  <span class="hljs-comment">// Count</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> k = <span class="hljs-number">2</span>; k &lt; n; ++k)
+    <span class="hljs-keyword">if</span> (is_prime[k])
+      ++primes;
+
+  <span class="hljs-keyword">return</span> primes;
+}
+</code></pre>
+</div>
+        <div class="slide" id="7"><h1><img class="emoji" draggable="false" alt="🔥" src="https://twemoji.maxcdn.com/2/svg/1f525.svg"> Version 2</h1>
+<pre><code class="language-c++"><span class="hljs-keyword">uint64_t</span> count(<span class="hljs-keyword">uint64_t</span> n)
+{
+  <span class="hljs-keyword">uint64_t</span> primes = <span class="hljs-number">1</span>;
+
+  <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">uint8_t</span>&gt; is_prime(n, <span class="hljs-literal">true</span>);
+
+  <span class="hljs-comment">// Sieve</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> k = <span class="hljs-number">3</span>; k * k &lt; n; k += <span class="hljs-number">2</span>)
+    <span class="hljs-keyword">if</span> (is_prime[k])
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> m = k * k; m &lt; n; m += <span class="hljs-number">2</span> * k)
+        is_prime[m] = <span class="hljs-literal">false</span>;
+
+  <span class="hljs-comment">// Count</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> k = <span class="hljs-number">3</span>; k &lt; n; k += <span class="hljs-number">2</span>)
+    <span class="hljs-keyword">if</span> (is_prime[k])
+      ++primes;
+
+  <span class="hljs-keyword">return</span> primes;
+}
+</code></pre>
+</div>
+        <div class="slide" id="8"><blockquote>
+<p>Why not store odd numbers only?</p>
+</blockquote>
+<div style="height:50px;"></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><code>k</code></th>
+<th style="text-align:center"><code>0</code></th>
+<th style="text-align:center"><code>1</code></th>
+<th style="text-align:center"><code>2</code></th>
+<th style="text-align:center"><code>3</code></th>
+<th style="text-align:center"><code>4</code></th>
+<th style="text-align:center"><code>5</code></th>
+<th style="text-align:center"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⋯</mo></mrow><annotation encoding="application/x-tex">\cdots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.31em;"></span><span class="strut bottom" style="height:0.31em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="minner">⋯</span></span></span></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">n</span></span></span></span></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⋯</mo></mrow><annotation encoding="application/x-tex">\cdots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.31em;"></span><span class="strut bottom" style="height:0.31em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="minner">⋯</span></span></span></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+        <div class="slide" id="9"><h1><img class="emoji" draggable="false" alt="💥" src="https://twemoji.maxcdn.com/2/svg/1f4a5.svg"> Version <s>2.0</s> 2.1</h1>
+<pre><code class="language-c++"><span class="hljs-keyword">uint64_t</span> count(<span class="hljs-keyword">uint64_t</span> n) <span class="hljs-comment">// assume n &gt; 1, even.</span>
+{
+  <span class="hljs-keyword">uint64_t</span> half = n / <span class="hljs-number">2</span>;
+  <span class="hljs-keyword">uint64_t</span> primes = <span class="hljs-number">1</span>;  
+
+  <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">uint8_t</span>&gt; is_prime(half, <span class="hljs-literal">true</span>);
+
+  <span class="hljs-comment">// Sieve</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> k = <span class="hljs-number">1</span>; <span class="hljs-number">2</span> * k * (k + <span class="hljs-number">1</span>) &lt; half; ++k)
+    <span class="hljs-keyword">if</span> (is_prime[k])
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> m = <span class="hljs-number">2</span> * k * (k + <span class="hljs-number">1</span>); m &lt; half; m += <span class="hljs-number">2</span> * k + <span class="hljs-number">1</span>)
+        is_prime[m] = <span class="hljs-literal">false</span>;
+
+  <span class="hljs-comment">// Count</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> k = <span class="hljs-number">1</span>; k &lt; half; ++k)
+    <span class="hljs-keyword">if</span> (is_prime[k])
+      ++primes;
+
+  <span class="hljs-keyword">return</span> primes;
+}
+</code></pre>
+</div>
+        <div class="slide" id="10"><h1><img class="emoji" draggable="false" alt="🚀" src="https://twemoji.maxcdn.com/2/svg/1f680.svg"> Version 3</h1>
+<pre><code class="language-c++"><span class="hljs-keyword">uint64_t</span> count(<span class="hljs-keyword">uint64_t</span> n)
+{
+  <span class="hljs-comment">// many more lines of code</span>
+}
+</code></pre>
+</div>
+        <div class="slide" id="11"><h1>Computing <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>π</mi><mo>(</mo><mn>1</mn><msup><mn>0</mn><mrow><mn>1</mn><mn>0</mn></mrow></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">\pi(10^{10})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03588em;">π</span><span class="mopen">(</span><span class="mord mathrm">1</span><span class="mord"><span class="mord mathrm">0</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">1</span><span class="mord mathrm">0</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mclose">)</span></span></span></span></h1>
+<img src="graph2.svg" width="100%">
+</div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+  </html>
