@@ -80,9 +80,29 @@ function factorial(uint64_t n) {
 
 ---
 
+# Why parallellism is necessary
+- Hardware development is beginning to slow
+- Power consumption grows faster than clock speed
+
+---
+
+# :school_satchel: No free lunch
+
+- **S**tarvation
+- **L**atency
+- **O**verhead
+- ~~**W**aiting for contention~~
+
+and ...
+
+- messy code?
+
+---
+
 # Parallel inner product
 
-- $n = 10$ elements and $P = 3$ processors
+- $z = \sum_{i = 1}^{n} x_i y_i$
+- $n = 10$ elements and $p = 3$ processors
 
 <table class="my-table">
   <tr>
@@ -324,6 +344,21 @@ Done after one last summation.
   </div>
 </div>
 
+---
+
+# A measure of costs
+
+- Local inner product
+$$C_1 = 2\left\lceil \frac{n}{p} \right\rceil - 1$$
+
+- Communication
+$$C_2 = (p - 1)g$$
+
+- Local sum
+$$C_3 = p - 1$$
+
+- In total (including 3 synchronizations)
+$$C = \left(2\left\lceil \frac{n}{p} \right\rceil + p - 2\right) + (p - 1)g + 3\ell$$
 
 ---
 
@@ -336,6 +371,14 @@ Done after one last summation.
     <button id="start-1" class="btn">go</button>
   </div>
 </div>
+
+---
+
+# Goal
+
+Compute the number of primes less than $10\,000\,000\,000$ i.e. evaluate 
+
+$$\pi(10^{10})$$
 
 ---
 
@@ -439,6 +482,8 @@ uint64_t count(uint64_t n) // assume n > 1, even.
 
 # :clock3: ~~96.9~~ ~~56.1~~ <span class="nice">47.5</span> seconds.
 
+- Why is this faster?
+
 ---
 
 # Segmented sieve
@@ -466,15 +511,13 @@ uint64_t count(uint64_t n)
 
 # :clock4: ~~96.9~~ ~~56.1~~ ~~47.5~~ <span class="nice">11.7</span> seconds.
 
----
-
-# Computing $\pi(10^{10})$
-
 <img src="graph2.svg">
 
 ---
 
 # Conclusion
 - Understand the architecture
+- 9 women can't get 1 baby in a month
+- Don't randomly access random access memory
 - Use data that is physically nearby
 - ...

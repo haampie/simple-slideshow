@@ -9,7 +9,11 @@
   <body class="markdown-body">
     <div id="slide-wrap">
       {{#each sections as |slide index|}}
-        <div class="slide" id="{{index}}">{{slide}}</div>
+        <div class="slide" id="{{index}}">
+          {{slide}}
+
+          <div class="slide-number">{{index}}</div>
+        </div>
       {{/each}}
     </div>
 
