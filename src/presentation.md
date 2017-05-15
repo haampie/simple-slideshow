@@ -59,7 +59,24 @@ def square(n):
 
 ---
 
-<!-- <iframe src="https://gcc.godbolt.org/e#g:!((g:!((g:!((h:codeEditor,i:(fontScale:1.8575209267199997,j:1,source:'int+sum(int+n)%0A%7B%0A++int+total+%3D+0%3B%0A++%0A++for+(int+i+%3D+0%3B+i+%3C+n%3B+i%2B%2B)%0A++++total+%2B%3D+i%3B%0A++%0A++return+total%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50.7175440874439,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:clang400,filters:(b:'0',commentOnly:'0',directives:'0',intel:'0'),fontScale:1.8575209267199997,options:'-O3+-std%3Dc%2B%2B14+-march%3Dnative',source:1),l:'5',n:'0',o:'x86-64+clang+4.0.0+(Editor+%231,+Compiler+%231)',t:'0')),k:49.2824559125561,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4"></iframe> -->
+## Haskell
+
+```haskell
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+```
+
+## C++
+
+```c++
+function factorial(uint64_t n) {
+  uint64_t f = 1;
+  for (uint64_t i = 1; i <= n; ++i) {
+      f *= i;
+  }
+  return f;
+}
+```
 
 ---
 

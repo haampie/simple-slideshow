@@ -46,7 +46,19 @@ x₂ = -b + √(b^<span class="hljs-number">2</span> - <span class="hljs-number"
     <span class="hljs-keyword">return</span> n * n
 </code></pre>
 </div>
-        <div class="slide" id="7"><!-- <iframe src="https://gcc.godbolt.org/e#g:!((g:!((g:!((h:codeEditor,i:(fontScale:1.8575209267199997,j:1,source:'int+sum(int+n)%0A%7B%0A++int+total+%3D+0%3B%0A++%0A++for+(int+i+%3D+0%3B+i+%3C+n%3B+i%2B%2B)%0A++++total+%2B%3D+i%3B%0A++%0A++return+total%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:50.7175440874439,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:clang400,filters:(b:'0',commentOnly:'0',directives:'0',intel:'0'),fontScale:1.8575209267199997,options:'-O3+-std%3Dc%2B%2B14+-march%3Dnative',source:1),l:'5',n:'0',o:'x86-64+clang+4.0.0+(Editor+%231,+Compiler+%231)',t:'0')),k:49.2824559125561,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4"></iframe> -->
+        <div class="slide" id="7"><h2>Haskell</h2>
+<pre><code class="language-haskell"><span class="hljs-title">factorial</span> <span class="hljs-number">0</span> = <span class="hljs-number">1</span>
+<span class="hljs-title">factorial</span> n = n * factorial (n - <span class="hljs-number">1</span>)
+</code></pre>
+<h2>C++</h2>
+<pre><code class="language-c++"><span class="hljs-function">function <span class="hljs-title">factorial</span><span class="hljs-params">(<span class="hljs-keyword">uint64_t</span> n)</span> </span>{
+  <span class="hljs-keyword">uint64_t</span> f = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint64_t</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) {
+      f *= i;
+  }
+  <span class="hljs-keyword">return</span> f;
+}
+</code></pre>
 </div>
         <div class="slide" id="8"><h1>Parallel inner product</h1>
 <ul>
