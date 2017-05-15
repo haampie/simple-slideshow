@@ -348,14 +348,12 @@ Done after one last summation.
 
 # A measure of costs
 
-- Local inner product
-$$C_1 = 2\left\lceil \frac{n}{p} \right\rceil - 1$$
-
-- Communication
-$$C_2 = (p - 1)g$$
-
-- Local sum
-$$C_3 = p - 1$$
+- Components:
+$$\begin{aligned}C_1 &= 2\left\lceil \frac{n}{p} \right\rceil - 1 & \text{(local inner product)}\\
+~ \\
+C_2 &= (p - 1)g & \text{(communication)}\\
+~ \\
+C_3 &= p - 1 & \text{(local sum)}\end{aligned}$$
 
 - In total (including 3 synchronizations)
 $$C = \left(2\left\lceil \frac{n}{p} \right\rceil + p - 2\right) + (p - 1)g + 3\ell$$
