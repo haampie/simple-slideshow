@@ -9,8 +9,7 @@ By Harmen Stoppels
 # Contents
 
 - Programming & mathematics
-- What makes a program fast?
-- Prime counting example
+- Parallellism by example
 - Conclusions.
 
 ---
@@ -96,6 +95,10 @@ function factorial(uint64_t n) {
 and ...
 
 - messy code?
+
+---
+
+# Example 1: parallel inner product
 
 ---
 
@@ -360,6 +363,10 @@ $$C = \left(2\left\lceil \frac{n}{p} \right\rceil + p - 2\right) + (p - 1)g + 3\
 
 ---
 
+# Example 2: sieve of Eratosthenes
+
+---
+
 # Sieve of Eratosthenes
 
 <div class="columns">
@@ -388,16 +395,14 @@ uint64_t count(uint64_t n)
 {
   uint64_t primes = 0;
 
-  vector<uint8_t> is_prime(n, true);
+  vector<uint8_t> is_prime(n, true);           // Initialize
 
-  // Sieve
-  for (uint64_t k = 2; k * k < n; ++k)
+  for (uint64_t k = 2; k * k < n; ++k)         // Sieve
     if (is_prime[k])
       for (uint64_t m = k * k; m < n; m += k)
         is_prime[m] = false;
 
-  // Count
-  for (uint64_t k = 2; k < n; ++k)
+  for (uint64_t k = 2; k < n; ++k)             // Count
     if (is_prime[k])
       ++primes;
 
@@ -418,16 +423,14 @@ uint64_t count(uint64_t n)
 {
   uint64_t primes = 1;
 
-  vector<uint8_t> is_prime(n, true);
+  vector<uint8_t> is_prime(n, true);           // Initialize
 
-  // Sieve
-  for (uint64_t k = 3; k * k < n; k += 2)
+  for (uint64_t k = 3; k * k < n; k += 2)      // Sieve
     if (is_prime[k])
       for (uint64_t m = k * k; m < n; m += 2 * k)
         is_prime[m] = false;
 
-  // Count
-  for (uint64_t k = 3; k < n; k += 2)
+  for (uint64_t k = 3; k < n; k += 2)          // Count
     if (is_prime[k])
       ++primes;
 
@@ -459,16 +462,14 @@ uint64_t count(uint64_t n) // assume n > 1, even.
   uint64_t half = n / 2;
   uint64_t primes = 1;  
 
-  vector<uint8_t> is_prime(half, true);
+  vector<uint8_t> is_prime(half, true);              // Initialize
 
-  // Sieve
-  for (uint64_t k = 1; 2 * k * (k + 1) < half; ++k)
+  for (uint64_t k = 1; 2 * k * (k + 1) < half; ++k)  // Sieve
     if (is_prime[k])
       for (uint64_t m = 2 * k * (k + 1); m < half; m += 2 * k + 1)
         is_prime[m] = false;
 
-  // Count
-  for (uint64_t k = 1; k < half; ++k)
+  for (uint64_t k = 1; k < half; ++k)                // Count
     if (is_prime[k])
       ++primes;
 
