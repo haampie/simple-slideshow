@@ -79,6 +79,12 @@ function factorial(uint64_t n) {
 
 ---
 
+# Approximating $\pi$ the hard way
+
+<img src="./pi.svg" width="100%">
+
+---
+
 # Why parallellism is necessary
 - Hardware development is beginning to slow
 - Power consumption grows faster than clock speed
