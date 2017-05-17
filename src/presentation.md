@@ -68,7 +68,7 @@ factorial n = n * factorial (n - 1)
 ## C++
 
 ```c++
-function factorial(uint64_t n) {
+uint64_t factorial(uint64_t n) {
   uint64_t f = 1;
   for (uint64_t i = 1; i <= n; ++i) {
       f *= i;
@@ -77,11 +77,6 @@ function factorial(uint64_t n) {
 }
 ```
 
----
-
-# Approximating $\pi$ the hard way
-
-<img src="./pi.svg" width="100%">
 
 ---
 
@@ -96,7 +91,7 @@ function factorial(uint64_t n) {
 - **S**tarvation
 - **L**atency
 - **O**verhead
-- ~~**W**aiting for contention~~
+- **W**aiting for contention
 
 and ...
 
@@ -104,7 +99,13 @@ and ...
 
 ---
 
-# Example 1: parallel inner product
+# :dart: Example 1: $\pi$, the hard way
+
+<img src="./pi.svg" width="100%">
+
+---
+
+# Example 2: parallel inner product
 
 ---
 
@@ -362,14 +363,15 @@ $$\begin{aligned}C_1 &= 2\left\lceil \frac{n}{p} \right\rceil - 1 & \text{(local
 ~ \\
 C_2 &= (p - 1)g & \text{(communication)}\\
 ~ \\
-C_3 &= p - 1 & \text{(local sum)}\end{aligned}$$
-
-- In total (including 3 synchronizations)
-$$C = \left(2\left\lceil \frac{n}{p} \right\rceil + p - 2\right) + (p - 1)g + 3\ell$$
+C_3 &= p - 1 & \text{(local sum)}\\
+~ \\
+C_4 &= 3\ell & \text{(synchronization)}\\
+~ \\
+C_{\text{total}} &= \left(2\left\lceil \frac{n}{p} \right\rceil + p - 2\right) + (p - 1)g + 3\ell\end{aligned}$$
 
 ---
 
-# Example 2: sieve of Eratosthenes
+# Example 3: sieve of Eratosthenes
 
 ---
 
