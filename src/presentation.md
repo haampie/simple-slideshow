@@ -10,9 +10,28 @@ By Harmen Stoppels
 
 - Programming & mathematics
 - Parallellism by example
-- Conclusions.
 
 ---
+
+# Why parallellism is necessary
+- Hardware development is beginning to slow
+- Power consumption grows faster than clock speed
+
+---
+
+# :school_satchel: No free lunch
+
+- **S**tarvation
+- **L**atency
+- **O**verhead
+- **W**aiting for contention
+
+and ...
+
+- messy code?
+
+---
+
 
 # Programming & math
 
@@ -33,7 +52,7 @@ X2 = -B - SQRT(B**2 - 4*A*C) / (2 * A);
 
 ```julia
 x₁ = -b + √(b^2 - 4a * c) / 2a
-x₂ = -b + √(b^2 - 4a * c) / 2a
+x₂ = -b - √(b^2 - 4a * c) / 2a
 ```
 
 ---
@@ -50,6 +69,9 @@ int number = rand();
 ```
 
 ---
+
+A Python function with **side effects**
+
 ```python
 def square(n):
     print "Sue me!"
@@ -76,26 +98,6 @@ uint64_t factorial(uint64_t n) {
   return f;
 }
 ```
-
-
----
-
-# Why parallellism is necessary
-- Hardware development is beginning to slow
-- Power consumption grows faster than clock speed
-
----
-
-# :school_satchel: No free lunch
-
-- **S**tarvation
-- **L**atency
-- **O**verhead
-- **W**aiting for contention
-
-and ...
-
-- messy code?
 
 ---
 
@@ -358,16 +360,15 @@ Done after one last summation.
 
 # A measure of costs
 
-- Components:
-$$\begin{aligned}C_1 &= 2\left\lceil \frac{n}{p} \right\rceil - 1 & \text{(local inner product)}\\
+$$\begin{aligned}T_1 &= 2\left\lceil \frac{n}{p} \right\rceil  & \text{(local inner product)}\\
 ~ \\
-C_2 &= (p - 1)g & \text{(communication)}\\
+T_2 &= (p - 1)g & \text{(communication)}\\
 ~ \\
-C_3 &= p - 1 & \text{(local sum)}\\
+T_3 &= p & \text{(local sum)}\\
 ~ \\
-C_4 &= 3\ell & \text{(synchronization)}\\
+T_4 &= 3\ell & \text{(synchronization)}\\
 ~ \\
-C_{\text{total}} &= \left(2\left\lceil \frac{n}{p} \right\rceil + p - 2\right) + (p - 1)g + 3\ell\end{aligned}$$
+T_{\text{total}} &= 2\left\lceil \frac{n}{p} \right\rceil + p  + (p - 1)g + 3\ell\end{aligned}$$
 
 ---
 
