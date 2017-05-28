@@ -12,16 +12,20 @@ body {
   background: #FFF;
   height: 100vh;
   overflow: hidden;
-  max-width: 1400px;
+  max-width: 1600px;
   padding: 2em;
   margin: 1em auto;
   font-size: 2rem;
   outline: 2px solid rgba(0, 0, 0, .08);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.slide-content {
   justify-content: center;
   flex-direction: column;
   display: flex;
-  box-sizing: border-box;
-  position: relative;
+  height: 100%;
 }
 
 .slide-number {
@@ -29,6 +33,13 @@ body {
   top: 1em;
   right: 1em;
   color: #AAA;
+}
+
+.markdown-body .sub {
+  display: block;
+  color: #AAA;
+  font-size: .7em;
+  margin-top: 1em;
 }
 
 iframe {
@@ -42,6 +53,16 @@ img.emoji
   height: 1em;
   width: 1em;
   vertical-align: middle;
+}
+
+.markdown-body h1:only-child {
+  text-align: center;
+  font-size: 3em;
+}
+
+.markdown-body h2:only-child {
+  text-align: center;
+  font-size: 2em;
 }
 
 @font-face {
@@ -627,7 +648,7 @@ img.emoji
 .markdown-body table th,
 .markdown-body table td {
   padding: 6px 13px;
-  border: 2px solid #dfe2e5;
+  border: 2px solid #CCC;
 }
 
 .markdown-body table tr {
@@ -898,7 +919,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .active-row {
-  outline: 20px solid #000;
+  outline: 10px solid #444;
+  box-shadow: 0 0 100px #000;
 }
 
 .btn {
@@ -936,6 +958,12 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .markdown-body .my-table {
   text-align: center;
   table-layout: fixed;
+}
+
+.markdown-body .no-border {
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
 }
 
 table.single-el {

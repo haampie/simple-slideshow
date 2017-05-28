@@ -1,4 +1,4 @@
-# Parallel programming
+# Parallel programming by example
 
 ### How to write performant code :rocket:
 
@@ -16,19 +16,6 @@ By Harmen Stoppels
 # Why parallellism is necessary
 - Hardware development is beginning to slow
 - Power consumption grows faster than clock speed
-
----
-
-# :school_satchel: No free lunch
-
-- **S**tarvation
-- **L**atency
-- **O**verhead
-- **W**aiting for contention
-
-and ...
-
-- messy code?
 
 ---
 
@@ -93,7 +80,7 @@ factorial n = n * factorial (n - 1)
 uint64_t factorial(uint64_t n) {
   uint64_t f = 1;
   for (uint64_t i = 1; i <= n; ++i) {
-      f *= i;
+      f = f * i;
   }
   return f;
 }
@@ -101,13 +88,19 @@ uint64_t factorial(uint64_t n) {
 
 ---
 
+## Shouldn't a compiler parallellize code?
+
+---
+
 # :dart: Example 1: $\pi$, the hard way
+
+---
 
 <img src="./pi.svg" width="100%">
 
 ---
 
-# Example 2: parallel inner product
+# Example 2: inner product
 
 ---
 
@@ -118,6 +111,7 @@ uint64_t factorial(uint64_t n) {
 
 <table class="my-table">
   <tr>
+    <td class="no-border">x =</td>
     <td>1</td>
     <td>2</td>
     <td>3</td>
@@ -133,6 +127,7 @@ uint64_t factorial(uint64_t n) {
 
 <table class="my-table">
   <tr>
+    <td class="no-border">y =</td>
     <td>5</td>
     <td>2</td>
     <td>1</td>
@@ -358,7 +353,7 @@ Done after one last summation.
 
 ---
 
-# A measure of costs
+# :hourglass: A measure of costs (flops)
 
 $$\begin{aligned}T_1 &= 2\left\lceil \frac{n}{p} \right\rceil  & \text{(local inner product)}\\
 ~ \\
@@ -372,7 +367,7 @@ T_{\text{total}} &= 2\left\lceil \frac{n}{p} \right\rceil + p  + (p - 1)g + 3\el
 
 ---
 
-# Example 3: sieve of Eratosthenes
+# Example 3: prime sieve
 
 ---
 
@@ -488,9 +483,7 @@ uint64_t count(uint64_t n) // assume n > 1, even.
   
 ---
 
-# :clock3: ~~96.9~~ ~~56.1~~ <span class="nice">47.5</span> seconds.
-
-- Why is this faster?
+# :clock3: ~~96.9~~ ~~56.1~~ <span class="nice">47.5</span> seconds <span class="sub">(but why?)</span>
 
 ---
 
@@ -517,15 +510,27 @@ uint64_t count(uint64_t n)
 
 ---
 
-# :clock4: ~~96.9~~ ~~56.1~~ ~~47.5~~ <span class="nice">11.7</span> seconds.
+# :clock4: ~~96.9~~ ~~56.1~~ ~~47.5~~ <span class="nice">11.7</span> seconds <span class="sub">(really?! :astonished:)</span>
 
-<img src="graph2.svg">
+---
+
+<img src="graph2.svg" width="100%">
+
+---
+
+# What's more?
+
+- **S**tarvation
+- **L**atency :ballot_box_with_check:
+- **O**verhead :ballot_box_with_check:
+- **W**aiting for contention
 
 ---
 
 # Conclusion
-- Understand the architecture
-- 9 women can't get 1 baby in a month
-- Don't randomly access random access memory
-- Use data that is physically nearby
-- ...
+<!-- 9 women can't get 1 baby in a month-->
+<!-- Don't randomly access random access memory-->
+- Parallel programming can be easy.
+- Parallel programming can be hard.
+- Think locally.
+

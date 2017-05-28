@@ -10,7 +10,7 @@
     <div id="slide-wrap">
       {{#each sections as |slide index|}}
         <div class="slide" id="{{index}}">
-          {{slide}}
+          <div class="slide-content">{{slide}}</div>
 
           <div class="slide-number">{{index}} / {{../sections.length}}</div>
         </div>
