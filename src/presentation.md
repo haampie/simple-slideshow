@@ -55,7 +55,7 @@ int rand(void);
 int number = rand();
 ```
 
----
+<hr>
 
 A Python function with **side effects**
 
@@ -361,9 +361,9 @@ T_2 &= (p - 1)g & \text{(communication)}\\
 ~ \\
 T_3 &= p & \text{(local sum)}\\
 ~ \\
-T_4 &= 3\ell & \text{(synchronization)}\\
+T_4 &= 2\ell & \text{(synchronization)}\\
 ~ \\
-T_{\text{total}} &= 2\left\lceil \frac{n}{p} \right\rceil + p  + (p - 1)g + 3\ell\end{aligned}$$
+T_{\text{total}} &= 2\left\lceil \frac{n}{p} \right\rceil + p  + (p - 1)g + 2\ell\end{aligned}$$
 
 ---
 
@@ -398,7 +398,6 @@ $$\pi(10^{10})$$
 uint64_t count(uint64_t n)
 {
   uint64_t primes = 0;
-
   vector<uint8_t> is_prime(n, true);           // Initialize
 
   for (uint64_t k = 2; k * k < n; ++k)         // Sieve
@@ -426,7 +425,6 @@ uint64_t count(uint64_t n)
 uint64_t count(uint64_t n)
 {
   uint64_t primes = 1;
-
   vector<uint8_t> is_prime(n, true);           // Initialize
 
   for (uint64_t k = 3; k * k < n; k += 2)      // Sieve
@@ -465,7 +463,6 @@ uint64_t count(uint64_t n) // assume n > 1, even.
 {
   uint64_t half = n / 2;
   uint64_t primes = 1;  
-
   vector<uint8_t> is_prime(half, true);              // Initialize
 
   for (uint64_t k = 1; 2 * k * (k + 1) < half; ++k)  // Sieve
@@ -473,11 +470,7 @@ uint64_t count(uint64_t n) // assume n > 1, even.
       for (uint64_t m = 2 * k * (k + 1); m < half; m += 2 * k + 1)
         is_prime[m] = false;
 
-  for (uint64_t k = 1; k < half; ++k)                // Count
-    if (is_prime[k])
-      ++primes;
-
-  return primes;
+  // ... etc
 }
 ```
   
@@ -532,5 +525,5 @@ uint64_t count(uint64_t n)
 <!-- Don't randomly access random access memory-->
 - Parallel programming can be easy.
 - Parallel programming can be hard.
-- Think locally.
+- Knowing the architecture can help you design better algorithms
 
