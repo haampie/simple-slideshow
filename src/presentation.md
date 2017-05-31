@@ -9,11 +9,11 @@ By Harmen Stoppels
 # Contents
 
 - Programming & mathematics
-- Parallellism by example
+- Parallelism by example
 
 ---
 
-# Why parallellism is necessary
+# Why parallelism is necessary
 - Hardware development is beginning to slow
 - Power consumption grows faster than clock speed
 
@@ -88,7 +88,7 @@ uint64_t factorial(uint64_t n) {
 
 ---
 
-## Shouldn't a compiler parallellize code?
+## Shouldn't a compiler parallelize code?
 
 ---
 
